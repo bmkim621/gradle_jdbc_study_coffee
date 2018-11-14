@@ -6,81 +6,86 @@ public class Sale {
 	private int price;	//제품단가
 	private int saleCnt;	//판매수량
 	private int marginRate;		//마진율
+	private SaleDetail detail;
 	
-	
-	//생성자
-	private Sale() {
+	public Sale() {
 		// TODO Auto-generated constructor stub
 	}
 
-	private Sale(int no, String pCode, int unitCost, int sAmount, int margin) {
+	public Sale(int no, String code, int price, int saleCnt, int marginRate, SaleDetail detail) {
 		this.no = no;
-		this.code = pCode;
-		this.price = unitCost;
-		this.saleCnt = sAmount;
-		this.marginRate = margin;
+		this.code = code;
+		this.price = price;
+		this.saleCnt = saleCnt;
+		this.marginRate = marginRate;
+		this.detail = detail;
 	}
 
-	private Sale(String pCode) {
-		this.code = pCode;
+	public Sale(int no, String code, int price, int saleCnt, int marginRate) {
+		this.no = no;
+		this.code = code;
+		this.price = price;
+		this.saleCnt = saleCnt;
+		this.marginRate = marginRate;
 	}
 
-	
-	//getter, setter
+	public Sale(String code) {
+		this.code = code;
+	}
+
 	public int getNo() {
 		return no;
 	}
-
 
 	public void setNo(int no) {
 		this.no = no;
 	}
 
-
-	public String getpCode() {
+	public String getCode() {
 		return code;
 	}
 
-
-	public void setpCode(String pCode) {
-		this.code = pCode;
+	public void setCode(String code) {
+		this.code = code;
 	}
 
-
-	public int getUnitCost() {
+	public int getPrice() {
 		return price;
 	}
 
-
-	public void setUnitCost(int unitCost) {
-		this.price = unitCost;
+	public void setPrice(int price) {
+		this.price = price;
 	}
 
-
-	public int getsAmount() {
+	public int getSaleCnt() {
 		return saleCnt;
 	}
 
-
-	public void setsAmount(int sAmount) {
-		this.saleCnt = sAmount;
+	public void setSaleCnt(int saleCnt) {
+		this.saleCnt = saleCnt;
 	}
 
-
-	public int getMargin() {
+	public int getMarginRate() {
 		return marginRate;
 	}
 
-
-	public void setMargin(int margin) {
-		this.marginRate = margin;
+	public void setMarginRate(int marginRate) {
+		this.marginRate = marginRate;
 	}
 
-	
-	//toString
+	public SaleDetail getDetail() {
+		return detail;
+	}
+
+	public void setDetail(SaleDetail detail) {
+		this.detail = detail;
+	}
+
 	@Override
 	public String toString() {
-		return String.format("sale [no=%s, pCode=%s, unitCost=%s, sAmount=%s, margin=%s]", no, code, price, saleCnt,
-				marginRate);
+		return "Sale [no=" + no + ", code=" + code + ", price=" + price + ", saleCnt=" + saleCnt + ", marginRate="
+				+ marginRate + ", detail=" + detail + "]";
 	}
+	
+	
 }

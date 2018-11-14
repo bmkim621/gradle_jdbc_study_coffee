@@ -5,40 +5,39 @@ public class Product {
 	private String code;
 	private String name;
 	
-	//생성자 만들기
 	public Product() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Product(String pCode, String pName) {
-		this.code = pCode;
-		this.name = pName;
+	public Product(String code, String name) {
+		this.code = code;
+		this.name = name;
 	}
 
-	public Product(String pCode) {
-		this.code = pCode;
+	public Product(String code) {
+		this.code = code;
 	}
 
-	//getter, setter
-	public String getpCode() {
+	public String getCode() {
 		return code;
 	}
 
-	public void setpCode(String pCode) {
-		this.code = pCode;
+	public void setCode(String code) {
+		this.code = code;
 	}
 
-	public String getpName() {
+	public String getName() {
 		return name;
 	}
 
-	public void setpName(String pName) {
-		this.name = pName;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	//toString
 	@Override
 	public String toString() {
-		return "product [pCode=" + code + ", pName=" + name + "]";
+		return "Product [code=" + code + ", name=" + name + "]";
 	}
+	
+	
 }

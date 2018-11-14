@@ -6,14 +6,25 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import com.mysql.jdbc.Connection;
+
+import gradle_jdbc_study_coffee.jdbc.ConnectionProvider;
+
 import java.awt.GridLayout;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import java.awt.FlowLayout;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
-public class CoffeeManagementUI extends JFrame {
+public class CoffeeManagementUI extends JFrame implements ActionListener {
 
 	private JPanel contentPane;
 	private JTextField tfCode;
@@ -21,14 +32,17 @@ public class CoffeeManagementUI extends JFrame {
 	private JTextField tfSaleCnt;
 	private JTextField tfMarginRate;
 	private JTextField tfName;
+	
+	private JButton btnInput;
 
 	/**
 	 * Create the frame.
+	 * @throws SQLException 
 	 */
-	public CoffeeManagementUI() {
+	public CoffeeManagementUI() throws SQLException {
 		initComponents();
 	}
-	private void initComponents() {
+	private void initComponents() throws SQLException {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 486, 295);
 		contentPane = new JPanel();
@@ -52,6 +66,7 @@ public class CoffeeManagementUI extends JFrame {
 		pContent.add(lblName);
 		lblName.setHorizontalAlignment(SwingConstants.CENTER);
 		
+		//제품명
 		tfName = new JTextField();
 		tfName.setEnabled(false);
 		pContent.add(tfName);
@@ -96,7 +111,8 @@ public class CoffeeManagementUI extends JFrame {
 		JPanel pButton = new JPanel();
 		contentPane.add(pButton, BorderLayout.SOUTH);
 		
-		JButton btnInput = new JButton("입력");
+		btnInput = new JButton("입력");
+		btnInput.addActionListener(this);
 		pButton.add(btnInput);
 		
 		JButton btnSalePrice = new JButton("출력1");
@@ -106,4 +122,15 @@ public class CoffeeManagementUI extends JFrame {
 		pButton.add(btnMarginPrice);
 	}
 
+	public void actionPerformed(ActionEvent arg0) {
+		if (arg0.getSource() == btnInput) {
+			do_btnInput_actionPerformed(arg0);
+		}
+	}
+	
+	//입력버튼 => 입력한 데이터들이 sale 테이블로
+	protected void do_btnInput_actionPerformed(ActionEvent arg0) {
+		
+	}
+	
 }

@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import gradle_jdbc_study_coffee.dto.Product;
+import gradle_jdbc_study_coffee.jdbc.ConnectionProvider;
 import gradle_jdbc_study_coffee.jdbc.LogUtil;
 import gradle_jdbc_study_coffee.jdbc.MySQLjdbcUtil;
 
@@ -39,11 +40,24 @@ public class ProductDaoImpl implements ProductDao {
 
 	//제품코드로 검색
 	@Override
-	public Product selectProductByCode(Product pdt) {
-		LogUtil.prnLog("selectProductByCode()");
+	public Product selectProductByCode(Product pdt) throws SQLException {
+		String sql = "select code, name from product where code = ?";
 		
-		
-		return null;
+		Product product = null;
+		try(Connection conn = ConnectionProvider.getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(sql);){
+			pstmt.setString(1, pdt.getCode());
+			LogUtil.prnLog(pstmt);
+			
+			try(ResultSet rs = pstmt.executeQuery()){
+				if(rs.next()) {
+					product = getProduct(rs);
+				}
+			}
+		} catch(SQLException e1) {
+			e1.printStackTrace();
+		}
+		return product;
 	}
 
 }
