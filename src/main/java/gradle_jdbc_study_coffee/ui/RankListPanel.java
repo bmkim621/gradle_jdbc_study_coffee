@@ -82,8 +82,20 @@ public class RankListPanel extends JPanel {
 	private Object[][] getDatas() {
 		//2차원 배열 만들기
 		Object[][] datas = new Object[list.size()][];
-		
+		for(int i = 0 ; i < list.size() ; i++) {
+			datas[i] = getSaleRow(list.get(i));
+		}
+			
 		return datas;
+	}
+
+	private Object[] getSaleRow(Sale sale) {
+	
+		return new Object[] {
+				sale.getNo(), sale.getCode(), new Product(sale.getCode()).getName(), sale.getSaleCnt(), 
+				sale.getDetail().getSupplytax(), sale.getDetail().getAddtax(), sale.getDetail().getSaleprice(),
+				sale.getMarginRate(), sale.getDetail().getMarginprice()
+		};
 	}
 
 	private String[] getColumnNames() {

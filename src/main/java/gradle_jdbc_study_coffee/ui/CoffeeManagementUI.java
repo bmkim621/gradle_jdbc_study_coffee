@@ -130,7 +130,7 @@ public class CoffeeManagementUI extends JFrame implements ActionListener {
 		btnMarginPrice.addActionListener(this);
 		pButton.add(btnMarginPrice);
 
-/*		tfCode.getDocument().addDocumentListener(new MyDocumentListener() {
+		tfCode.getDocument().addDocumentListener(new MyDocumentListener() {
 
 			@Override
 			public void msg() {
@@ -138,9 +138,9 @@ public class CoffeeManagementUI extends JFrame implements ActionListener {
 
 					Product pdt = new Product(tfCode.getText().trim());
 					try {
-	//					Product searchPdt = productService.searchProduct(pdt);
-//						System.out.println(searchPdt);
-	//					tfName.setText(searchPdt.getName());
+					Product searchPdt = saleService.searchProduct(pdt);
+						System.out.println(searchPdt);
+					tfName.setText(searchPdt.getName());
 					} catch (SQLException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -151,7 +151,7 @@ public class CoffeeManagementUI extends JFrame implements ActionListener {
 
 			}
 
-		}); */
+		}); 
 	}
 
 	public void actionPerformed(ActionEvent arg0) {

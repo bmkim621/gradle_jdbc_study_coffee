@@ -39,11 +39,11 @@ public class OutputUI extends JFrame {
 			list = service.outputOrder(isSale);
 			RankListPanel panel = new RankListPanel();
 			panel.setList(list);
+			contentPane.add(panel, BorderLayout.CENTER);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		
-//		contentPane.add(panel, BorderLayout.CENTER);
 	}
 
 }
