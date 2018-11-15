@@ -92,7 +92,7 @@ public class RankListPanel extends JPanel {
 	private Object[] getSaleRow(Sale sale) {
 	
 		return new Object[] {
-				sale.getNo(), sale.getCode(), new Product(sale.getCode()).getName(), sale.getSaleCnt(), 
+				sale.getNo(), sale.getProduct(), sale.getProduct().getName(), sale.getSaleCnt(), 
 				sale.getDetail().getSupplytax(), sale.getDetail().getAddtax(), sale.getDetail().getSaleprice(),
 				sale.getMarginRate(), sale.getDetail().getMarginprice()
 		};

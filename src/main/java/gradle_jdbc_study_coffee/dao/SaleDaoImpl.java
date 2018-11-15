@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import gradle_jdbc_study_coffee.dto.Product;
 import gradle_jdbc_study_coffee.dto.Sale;
 import gradle_jdbc_study_coffee.dto.SaleDetail;
 import gradle_jdbc_study_coffee.jdbc.ConnectionProvider;
@@ -35,7 +36,7 @@ public class SaleDaoImpl implements SaleDao {
 
 	private Sale getSale(ResultSet rs) throws SQLException {
 		int no = rs.getInt("no");
-		String code = rs.getString("code");
+		Product code = new Product(rs.getString("code"));
 		int price = rs.getInt("price");
 		int saleCnt = rs.getInt("saleCnt");
 		int marginRate = rs.getInt("marginRate");
@@ -54,7 +55,8 @@ public class SaleDaoImpl implements SaleDao {
 				PreparedStatement pstmt = conn.prepareStatement(sql);){
 			//1 번호, 2 제품코드, 3 제품단가, 4 판매수량, 5 마진율
 			pstmt.setInt(1, sale.getNo());
-			pstmt.setString(2, sale.getCode());
+			//Product code = new Product(rs.getString("code"));
+			pstmt.setString(2, sale.getProduct().getCode());
 			pstmt.setInt(3, sale.getPrice());
 			pstmt.setInt(4, sale.getSaleCnt());
 			pstmt.setInt(5, sale.getMarginRate());
@@ -89,7 +91,8 @@ public class SaleDaoImpl implements SaleDao {
 
 	private Sale getSaleDetail(ResultSet rs) throws SQLException {
 		int no = rs.getInt("no");
-		String code = rs.getString("code");
+//		String code = rs.getString("code");
+		Product product = new Product(rs.getString("name"));
 		int price = rs.getInt("price");
 		int saleCnt = rs.getInt("saleCnt");
 		int marginRate = rs.getInt("marginRate");
@@ -99,7 +102,7 @@ public class SaleDaoImpl implements SaleDao {
 		int marginprice = rs.getInt("marginprice");
 		
 		SaleDetail detail = new SaleDetail(supplytax, addtax, saleprice, marginprice);
-		Sale sale = new Sale(no, code, price, saleCnt, marginRate, detail);
+		Sale sale = new Sale(no, product, marginprice, saleCnt, marginRate, detail);
 		LogUtil.prnLog(sale.toString());
 		return sale;
 	}

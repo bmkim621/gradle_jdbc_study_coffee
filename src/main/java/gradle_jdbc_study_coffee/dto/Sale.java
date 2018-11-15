@@ -2,7 +2,7 @@ package gradle_jdbc_study_coffee.dto;
 
 public class Sale {
 	private int no;
-	private String code;	//제품코드
+	private Product product;	//제품코드
 	private int price;	//제품단가
 	private int saleCnt;	//판매수량
 	private int marginRate;		//마진율
@@ -12,25 +12,26 @@ public class Sale {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Sale(int no, String code, int price, int saleCnt, int marginRate, SaleDetail detail) {
+	public Sale(int no, Product product, int price, int saleCnt, int marginRate, SaleDetail detail) {
 		this.no = no;
-		this.code = code;
+		this.product = product;
 		this.price = price;
 		this.saleCnt = saleCnt;
 		this.marginRate = marginRate;
 		this.detail = detail;
 	}
 
-	public Sale(int no, String code, int price, int saleCnt, int marginRate) {
+	public Sale(int no, Product product, int price, int saleCnt, int marginRate) {
 		this.no = no;
-		this.code = code;
+		this.product = product;
 		this.price = price;
 		this.saleCnt = saleCnt;
 		this.marginRate = marginRate;
 	}
 
-	public Sale(String code) {
-		this.code = code;
+	//제품코드
+	public Sale(Product product) {
+		this.product = product;
 	}
 
 	public int getNo() {
@@ -41,12 +42,12 @@ public class Sale {
 		this.no = no;
 	}
 
-	public String getCode() {
-		return code;
+	public Product getProduct() {
+		return product;
 	}
 
-	public void setCode(String code) {
-		this.code = code;
+	public void setProduct(Product product) {
+		this.product = product;
 	}
 
 	public int getPrice() {
@@ -81,11 +82,10 @@ public class Sale {
 		this.detail = detail;
 	}
 
+	//toString
 	@Override
 	public String toString() {
-		return "Sale [no=" + no + ", code=" + code + ", price=" + price + ", saleCnt=" + saleCnt + ", marginRate="
+		return "Sale [no=" + no + ", product=" + product + ", price=" + price + ", saleCnt=" + saleCnt + ", marginRate="
 				+ marginRate + ", detail=" + detail + "]";
 	}
-	
-	
 }

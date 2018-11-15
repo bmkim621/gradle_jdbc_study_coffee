@@ -199,7 +199,7 @@ public class CoffeeManagementUI extends JFrame implements ActionListener {
 		int saleCnt = Integer.parseInt(tfSaleCnt.getText().trim());
 		int marginRate = Integer.parseInt(tfMarginRate.getText().trim());
 
-		return new Sale(0, code, price, saleCnt, marginRate);
+		return new Sale(0, new Product(code), price, saleCnt, marginRate);
 	}
 
 	//출력1
