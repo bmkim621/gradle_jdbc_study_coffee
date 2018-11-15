@@ -9,4 +9,6 @@ public interface SaleDao {
 	List<Sale> selectSaleByAll() throws SQLException;
 	
 	int insertSale(Sale sale) throws SQLException;
+	
+	List<Sale> selectSaleRank(boolean isSale) throws SQLException;
 }
