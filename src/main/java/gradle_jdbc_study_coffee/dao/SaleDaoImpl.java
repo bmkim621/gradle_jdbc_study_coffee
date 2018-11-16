@@ -92,17 +92,18 @@ public class SaleDaoImpl implements SaleDao {
 	private Sale getSaleDetail(ResultSet rs) throws SQLException {
 		int no = rs.getInt("no");
 //		String code = rs.getString("code");
-		Product product = new Product(rs.getString("name"));
+		Product product = new Product(rs.getString("code"), rs.getString("name"));
 		int price = rs.getInt("price");
 		int saleCnt = rs.getInt("saleCnt");
 		int marginRate = rs.getInt("marginRate");
-		int supplytax = rs.getInt("supplytax");
+		int supplyprice = rs.getInt("supplyprice");
 		int addtax = rs.getInt("addtax");
 		int saleprice = rs.getInt("saleprice");
 		int marginprice = rs.getInt("marginprice");
+		int rank = rs.getInt("rank");
 		
-		SaleDetail detail = new SaleDetail(supplytax, addtax, saleprice, marginprice);
-		Sale sale = new Sale(no, product, marginprice, saleCnt, marginRate, detail);
+		SaleDetail detail = new SaleDetail(supplyprice, addtax, saleprice, marginprice, rank);
+		Sale sale = new Sale(no, product, price, saleCnt, marginRate, detail);
 		LogUtil.prnLog(sale.toString());
 		return sale;
 	}

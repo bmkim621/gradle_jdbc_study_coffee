@@ -56,7 +56,7 @@ public class CoffeeManagementUI extends JFrame implements ActionListener {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
-
+		
 		JPanel pContent = new JPanel();
 		contentPane.add(pContent);
 		pContent.setLayout(new GridLayout(0, 4, 10, 10));

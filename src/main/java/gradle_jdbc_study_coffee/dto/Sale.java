@@ -82,10 +82,9 @@ public class Sale {
 		this.detail = detail;
 	}
 
-	//toString
 	@Override
 	public String toString() {
-		return "Sale [no=" + no + ", product=" + product + ", price=" + price + ", saleCnt=" + saleCnt + ", marginRate="
-				+ marginRate + ", detail=" + detail + "]";
+		return String.format("Sale [no=%s, product=%s, price=%s, saleCnt=%s, marginRate=%s, detail=%s]", no, product,
+				price, saleCnt, marginRate, detail);
 	}
 }

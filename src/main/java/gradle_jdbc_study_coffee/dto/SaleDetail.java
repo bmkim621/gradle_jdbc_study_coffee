@@ -2,31 +2,38 @@ package gradle_jdbc_study_coffee.dto;
 
 public class SaleDetail {
 	//공급가액, 부가세액, 판매금액, 마진액
-	private int supplytax;
+	private int supplyprice;
 	private int addtax;
 	private int saleprice;
 	private int marginprice;
+	private int rank;
 	
 	//생성자
 	public SaleDetail() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public SaleDetail(int supplytax, int addtax, int saleprice, int marginprice) {
-		this.supplytax = supplytax;
+	public SaleDetail(int supplyprice, int addtax, int saleprice, int marginprice, int rank) {
+		this.supplyprice = supplyprice;
+		this.addtax = addtax;
+		this.saleprice = saleprice;
+		this.marginprice = marginprice;
+		this.rank = rank;
+	}
+
+	public SaleDetail(int supplyprice, int addtax, int saleprice, int marginprice) {
+		this.supplyprice = supplyprice;
 		this.addtax = addtax;
 		this.saleprice = saleprice;
 		this.marginprice = marginprice;
 	}
 
-	//getter, setter
-	
-	public int getSupplytax() {
-		return supplytax;
+	public int getSupplyprice() {
+		return supplyprice;
 	}
 
-	public void setSupplytax(int supplytax) {
-		this.supplytax = supplytax;
+	public void setSupplyprice(int supplyprice) {
+		this.supplyprice = supplyprice;
 	}
 
 	public int getAddtax() {
@@ -53,14 +60,20 @@ public class SaleDetail {
 		this.marginprice = marginprice;
 	}
 
-	
-	//toString
+	public int getRank() {
+		return rank;
+	}
+
+	public void setRank(int rank) {
+		this.rank = rank;
+	}
+
 	@Override
 	public String toString() {
-		return "SaleDetail [supplytax=" + supplytax + ", addtax=" + addtax + ", saleprice=" + saleprice
-				+ ", marginprice=" + marginprice + "]";
+		return String.format("SaleDetail [supplyprice=%s, addtax=%s, saleprice=%s, marginprice=%s, rank=%s]",
+				supplyprice, addtax, saleprice, marginprice, rank);
 	}
-	
-	
-	
+
+
+
 }

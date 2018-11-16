@@ -13,6 +13,8 @@ import javax.swing.table.TableColumnModel;
 
 import gradle_jdbc_study_coffee.dto.Product;
 import gradle_jdbc_study_coffee.dto.Sale;
+import gradle_jdbc_study_coffee.jdbc.LogUtil;
+import javax.swing.JLabel;
 
 public class RankListPanel extends JPanel {
 	private JTable table;
@@ -39,16 +41,13 @@ public class RankListPanel extends JPanel {
 		
 		table = new JTable();
 		scrollPane.setViewportView(table);
-		
-		//정렬, 폭 => 메서드 만들고 가변배열로 처리
-		setAlignWidth();
 	}
 	
 	//tableCellAlignment, tableSetWidth 추상메서드로 하고 setAlignWidth만 조절하면 됨.
 	private void setAlignWidth() {
 		tableCellAlignment(SwingConstants.CENTER, 0, 1, 2);
 		tableCellAlignment(SwingConstants.RIGHT, 3, 4, 5, 6, 7, 8, 9);
-		tableSetWidth(100, 100, 200, 150, 100, 200, 200, 200, 100, 150);
+		tableSetWidth(100, 150, 200, 150, 150, 200, 150, 200, 100, 150);
 		
 	}
 	
@@ -76,25 +75,35 @@ public class RankListPanel extends JPanel {
 				getDatas(),
 				getColumnNames()
 			));
+		
+		//정렬, 폭 => 메서드 만들고 가변배열로 처리
+				setAlignWidth();
 	}
 	
 	//getDatas
 	private Object[][] getDatas() {
 		//2차원 배열 만들기
-		Object[][] datas = new Object[list.size()][];
+		Object[][] datas = new Object[list.size()+1][];
 		for(int i = 0 ; i < list.size() ; i++) {
 			datas[i] = getSaleRow(list.get(i));
 		}
-			
+		datas[list.size()] = getTotal();	
 		return datas;
 	}
 
 	private Object[] getSaleRow(Sale sale) {
 	
 		return new Object[] {
-				sale.getNo(), sale.getProduct(), sale.getProduct().getName(), sale.getSaleCnt(), 
-				sale.getDetail().getSupplytax(), sale.getDetail().getAddtax(), sale.getDetail().getSaleprice(),
-				sale.getMarginRate(), sale.getDetail().getMarginprice()
+				sale.getDetail().getRank(), //순위
+				sale.getProduct().getCode(), 	//제품코드
+				sale.getProduct().getName(), //제품명
+				String.format("%,d", sale.getPrice()), //제품단가
+				String.format("%,d", sale.getSaleCnt()), //판매수량
+				String.format("%,d", sale.getDetail().getSupplyprice()),	//공급가액
+				String.format("%,d", sale.getDetail().getAddtax()), //부가세액
+				String.format("%,d", sale.getDetail().getSaleprice()), //판매금액
+				sale.getMarginRate() + "%", //마진율
+				String.format("%,d", sale.getDetail().getMarginprice())	//마진액
 		};
 	}
 
@@ -102,6 +111,26 @@ public class RankListPanel extends JPanel {
 		return new String[] {
 					"순위", "제품코드", "제품명", "제품단가", "판매수량", "공급가액", "부가세액", "판매금액", "마진율", "마진액"
 				};
+	}
+	
+	//공급가액
+	public Object[] getTotal() {
+		LogUtil.prnLog("getTotal()");
+		int totalSupplyPrice = 0;	//공급가액 합
+		int totalAddTax = 0;	//부가세액 합
+		int totalSalePrice = 0;	//판매금액 합
+		int totalMarginPrice = 0;	//마진액 합
+		for(Sale s : list) {
+			totalSupplyPrice += s.getDetail().getSupplyprice();
+			totalAddTax += s.getDetail().getAddtax();
+			totalSalePrice += s.getDetail().getSaleprice();
+			totalMarginPrice += s.getDetail().getMarginprice();
+//			LogUtil.prnLog(s.toString());
+		}
+		LogUtil.prnLog(totalSupplyPrice + "");
+		return new Object[] {"합계", "", "", "", "", String.format("%,d", totalSupplyPrice), 
+							String.format("%,d", totalAddTax), String.format("%,d", totalSalePrice),"",
+							String.format("%,d", totalMarginPrice)};
 	}
 
 }
